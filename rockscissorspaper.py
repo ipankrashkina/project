@@ -2,6 +2,9 @@ from cv2 import cv2
 import mediapipe as mp
 import numpy as np
 
+print('WARNING: you should show your hand vertically')
+print('RULES: rock kills scissors, scissors kills paper, paper kills rock')
+print('This program will print what you need to show to win')
 handsDetector = mp.solutions.hands.Hands()
 cap = cv2.VideoCapture(0)
 while(cap.isOpened()):
@@ -25,11 +28,11 @@ while(cap.isOpened()):
         x_r1 = int(results.multi_hand_landmarks[0].landmark[13].x * flippedRGB.shape[1])
         y_r1 = int(results.multi_hand_landmarks[0].landmark[13].y * flippedRGB.shape[0])
         if y_point > y_p1 and y_middle > y_m1 and y_ring > y_r1:
-            print('камень')
+            print('the figure is rock, you should show paper')
         elif y_point < y_p1 and y_middle < y_m1 and y_ring > y_r1:
-            print('ножницы')
+            print('the figure is scissors, you should show rock')
         elif y_point < y_p1 and y_middle < y_m1 and y_ring < y_r1:
-            print('бумага')
+            print('the figure is paper, you should show scissors')
 
 
     res_image = cv2.cvtColor(flippedRGB, cv2.COLOR_RGB2BGR)
